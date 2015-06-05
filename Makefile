@@ -1,12 +1,7 @@
-include ~/common/Makefile
-
 .PHONY	: store
 
-JAVAD := /software/solaris/compilers/java/jdk1.5.0/bin
-JAVAC := $(JAVAD)/javac
 JAVAC := javac
 JOPT  := -Xlint:-serial -encoding latin1
-RYAN  := ../..
 DIR   := submit
 
 %.class :       %.java
@@ -27,28 +22,12 @@ client.jar	:  default
 
 install	:	~/public_html/client.jar 
 
-jsp	:	~/software/apache-tomcat-5.5.16/webapps/ROOT/WEB-INF/lib/client.jar
-
-
-
-
 ~/public_html/client.jar :	client.jar
 	/bin/cp client.jar ~/public_html
 	chmod go=r $@
 
-ws	:~/public_html/sclient.jar
-
-~/public_html/sclient.jar :	sclient.jar
-	/bin/cp sclient.jar ~/public_html
-	chmod go=r $@
-
-~/software/apache-tomcat-5.5.16/webapps/ROOT/WEB-INF/lib/client.jar	:	client.jar
-	-@/bin/rm $@
-	/bin/cp client.jar $@
-	chmod go=r $@
-
 start	:
-	$(java) submit.server.SubmitServer &
+	java submit.server.SubmitServer &
 
 
 server.jar	:  default
@@ -63,10 +42,6 @@ store:
 
 sclient.jar :	client.jar
 	jarsigner -keystore store -keypass 'pass>6chars' -storepass storepass -signedjar sclient.jar client.jar ryan
-
-find	:
-	${RYAN}/software/findbugs-2.0.1/bin/findbugs -textui -experimental -relaxed -effort:max submit
-
 
 clean	:
 	/bin/rm ${DIR}/*/*.class
