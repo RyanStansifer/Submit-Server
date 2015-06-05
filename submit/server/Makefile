@@ -1,0 +1,2 @@
+dafault	:
+	make -C ../..

@@ -1,0 +1,6 @@
+19a20
+> import java.util.Iterator;
+103c104
+<    private void checkEMail (final String email) {
+---
+>    private void checkLastName (final String email) {

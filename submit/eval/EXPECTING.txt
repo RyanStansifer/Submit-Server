@@ -1,0 +1,3 @@
+\Q.\E \Qlog.py\E      1 1 text, Python
+\Q.\E .*\Q.\Ejava     0 4 text, Java
+
