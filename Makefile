@@ -15,10 +15,8 @@ jar	: 	client.jar
 shared_files := ${DIR}/entry/FileInfo.java ${DIR}/server/Response.java ${DIR}/server/BadPathNameException.java
 
 client.jar	:  default
-	-@/bin/rm mc.mf
-	echo "Main-Class: submit.gui.Main" > mc.mf
-	jar cvmf mc.mf $@ ${DIR}/client/*.class ${DIR}/gui/*.class ${DIR}/shared/*.class resources/
-	-@/bin/rm mc.mf
+	jar cvef submit.gui.Main $@ ${DIR}/client/*.class ${DIR}/gui/*.class ${DIR}/shared/*.class resources/
+
 
 install	:	~/public_html/client.jar 
 
@@ -29,13 +27,8 @@ install	:	~/public_html/client.jar
 start	:
 	java submit.server.SubmitServer &
 
-
 server.jar	:  default
-	-@/bin/rm mc.mf
-	echo "Main-Class: submit.server.SubmitServer" > mc.mf
-	jar cvmf mc.mf $@ ${DIR}/server/*.class ${DIR}/email/*.class ${DIR}/shared/*.class
-	-@/bin/rm mc.mf
-	chmod go+r $@
+	jar cvef submit.server.SubmitServer $@ ${DIR}/server/*.class ${DIR}/email/*.class ${DIR}/shared/*.class
 
 store:
 	keytool -genkey -alias ryan -keypass 'pass>6chars' -keystore store -storepass storepass -validity 180
