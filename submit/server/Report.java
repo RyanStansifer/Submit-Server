@@ -25,7 +25,7 @@ import java.text.ChoiceFormat;
 
 public class Report {
 
-   private final static String WWW_HOST = "www.cs.fit.edu";
+   private final static String WWW_HOST = "cs.fit.edu";
    private final static String DEFAULT_REPORT_URL =
       String.format ("http://%s/%s", WWW_HOST, "~"+System.getProperty ("user.name"));
    public final static String reportURL = System.getProperty ("report.URL", DEFAULT_REPORT_URL);
@@ -35,7 +35,7 @@ public class Report {
    public final static String reportDIR = System.getProperty ("report.DIR", DEFAULT_REPORT_DIR);
 
    static {
-      final File d = new File(reportDIR); 
+      final File d = new File(reportDIR);
       if (!d.exists())  throw new RuntimeException ("directory " + d.toString() + " doesn't exist");
       if (!d.isDirectory()) throw new RuntimeException ("directory " + d.toString() + " not a directory");
       if (!d.canWrite()) throw new RuntimeException ("directory " + d.toString() + " not writeable");
@@ -57,7 +57,7 @@ public class Report {
      The current term's place for putting public, feedback, html reports.
      It should already exist and be publically searchable/executable.
    */
-      
+
    public static File reportDirFile (String class_name) {
       return new File (html_home, reportDir (class_name));
    }
@@ -73,7 +73,7 @@ public class Report {
    public static String reportURL (File project_directory) {
       return reportURL+'/'+reportName(project_directory.getParentFile().getName(),project_directory.getName());
    }
-      
+
    private final String class_name;
    private final String project;
 
@@ -150,7 +150,7 @@ public class Report {
 
       out.println ("This report was generated on " + FileInfo.format.format (new Date())+".");
       out.println (submissions (directories.size()));
-      
+
       out.println ("If your browser has cached this URL, you may have to \"refresh\" or \"reload\"");
       out.println ("this document to view the most recent submissions.");
       out.println ("This report is usually generated only when a new submission has been recevied.");
@@ -170,7 +170,7 @@ public class Report {
 
    void listings () throws IOException {
       out.println ("<h2>Summary of Submissions</h2>");
-      
+
       if (SubmitServer.VERBOSE > 13) {
          System.out.println ("Project directory: " + Course.getProjectDirectory (class_name, project));
          System.out.println (directories.size() + " directories to list:");
