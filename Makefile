@@ -15,10 +15,10 @@ jar	: 	client.jar
 shared_files := ${DIR}/entry/FileInfo.java ${DIR}/server/Response.java ${DIR}/server/BadPathNameException.java
 
 client.jar	:  default
-	jar cvef submit.gui.Main $@ ${DIR}/client/*.class ${DIR}/gui/*.class ${DIR}/shared/*.class resources/
+	jar cvef submit.client.Ping $@ ${DIR}/client/*.class ${DIR}/shared/*.class resources/
 
 
-install	:	~/public_html/client.jar 
+install	:	~/public_html/client.jar
 
 ~/public_html/client.jar :	client.jar
 	/bin/cp client.jar ~/public_html
