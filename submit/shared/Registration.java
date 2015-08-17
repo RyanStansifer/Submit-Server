@@ -18,6 +18,7 @@ import java.util.Random;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import java.math.BigInteger;
 
@@ -186,7 +187,7 @@ public final class Registration implements Comparable <Registration>, Serializab
 
    public String getKey ()      { return control; }
    public String getControl ()  { return control; }
-   private String getDirectoryName () { return control; }
+   //private String getDirectoryName () { return control; }
    public String getEMail () { return email; }
    public String getHelpMessage () {
       return
@@ -225,7 +226,7 @@ public final class Registration implements Comparable <Registration>, Serializab
       return s.substring (0, Math.min (length, s.length()));
    }
 
-   public String getSquashedName () {
+   private String getSquashedName () throws PatternSyntaxException {
       return substring (substring (squash(last_name),8)+"_"+squash(first_name), 12);
    }
 
@@ -383,7 +384,6 @@ public final class Registration implements Comparable <Registration>, Serializab
    }
 
    public static void save (final File f, final HashMap<String,Registration> h) throws IOException {
-      //      save (new PrintWriter (new FileWriter (f)), h);
       save (new PrintWriter (f, ENC), h);
    }
 }
