@@ -216,7 +216,7 @@ public final class Registration implements Comparable <Registration>, Serializab
       return
          Normalizer.normalize(s, Normalizer.Form.NFD). // separate diacritics
             replaceAll ("[\\p{InCombiningDiacriticalMarks}]+", "").   // remove diacritics
-               replaceAll ("[ .-']+", "").   // remove troublesome ASCII characters
+               replaceAll ("[ .\\-']+", "").   // remove troublesome ASCII characters
                   toLowerCase().                  // covert to lower case
                      replaceAll("[^\\p{ASCII}]", "Q");   // flatten to ASCII
    }
