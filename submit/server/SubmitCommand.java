@@ -33,7 +33,7 @@ class SubmitCommand {
          if (SubmitServer.VERBOSE>5) {
             System.out.format ("No registration for control code '%s'%n", args.getControl());
          }
-         resp.add_line ("Error:  no authorization");
+         resp.add_line ("Error:  control code not registered with the submit server; check for typos");
          return;
       }
       if (SubmitServer.VERBOSE>2) {
