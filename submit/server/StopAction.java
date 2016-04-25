@@ -2,7 +2,6 @@ package submit.server;
 
 import submit.shared.Response;
 
-
 final class StopAction {
 
    static void stop (final Parameters args, final Response resp) {

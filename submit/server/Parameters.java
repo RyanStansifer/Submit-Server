@@ -17,9 +17,8 @@ import java.util.regex.Matcher;
 */
 class Parameters extends Properties implements Serializable {
 
-   // Shall we lie and use an old serilaID??
+   // Shall we lie and use an old serialID??
    static final long serialVersionUID = 5345151278882814896L;
-
 
    Parameters (final String n) {
       this (n, null);
@@ -122,9 +121,7 @@ class Parameters extends Properties implements Serializable {
    }
 
    boolean authenticateAdministrator () {
-      if (! getProperty("password","").equals("carrier pigeon")) return (false);
-      if (! getProperty("user.name","").equals("ryan")) return (false);
-      return (true);
+      return (false);
    }
 
    public String toString () {

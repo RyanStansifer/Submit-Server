@@ -7,11 +7,6 @@ import submit.shared.Response;
 final class PingAction {
 
    static void ping (final Parameters args, final Response resp) {
-      if (args.authenticateAdministrator()) {
-	 resp.add_line ("Server administrator recognized.");
-	 // resp.addList (Status.onProjects (db.root));
-      }
-
       final String ln = args.getProperty("last_name");
       final String fn = args.getProperty("first_name");
       final Registration r;

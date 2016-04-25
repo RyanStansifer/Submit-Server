@@ -88,7 +88,7 @@ public class Connection implements Runnable {
             } else if (cmd.equals ("mail")) {
                mail ();
             } else if (cmd.equals ("stop")) {
-               StopAction.stop (args,resp);
+               // No graceful way to stop
             } else if (cmd.equals ("create")) {
                CreateProject.create (args, resp);
             } else if (cmd.equals ("turnon")) {
