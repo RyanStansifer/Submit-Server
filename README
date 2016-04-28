@@ -1,0 +1,57 @@
+#Submit Server#
+
+The purpose of the submit server is to facilitate and organize the
+transfer of student coursework in a way that is convenient and uniform
+to the instructor.  Users register with their e-mail address and
+receive a control code which uniquely identifies them.
+
+The service is completely independent of student records,
+authentication systems, course management systems.
+
+The project is stable having been used for more than a decade in about
+10 classes per semester.
+
+GUI clients have all but disappeared being replaced by invidual HTML forms
+and a php file running the command line client.  Otherwise only the command
+line interface to the client is available.
+
+java -Dpassword="${PASSWORD}" -Dcourse=${CLASS} -Dproject=${PROJECT} -Dcommand=create -cp client.jar submit.client.Admin
+java -Dpassword="${PASSWORD}" -Dcourse=${CLASS} -Dproject=${PROJECT} -Dcommand=turnon  -cp client.jar submit.client.Admin
+java -Dpassword="${PASSWORD}" -Dcourse=${CLASS} -Dproject=${PROJECT} -Dcommand=turnoff -cp client.jar submit.client.Admin
+java                          -Dcourse=${CLASS} -Dproject=${PROJECT} -cp client.jar submit.client.Download ${PROJECT}.jar
+
+java -Dcontrol=${CONTROL} -Dcourse=${CLASS} -Dproject=${PROJECT} -cp client.jar submit.client.Submit ${FILE}
+
+
+The submit server does not have a feedback system.  Instructors typically have
+their unqiue and highly idiosyncric tool-chain (variously automated) for
+analysis, execution of programs, detection of similarity, and grading.
+
+## Instructions ##
+
+The server needs a port, a mail server, access to write WWW pages to
+acknowledge the submissions, and a directory in which to store
+submissions.  It uses a simple flat-file database of registrations and
+simple files.  
+
+ Setup the arguments to the program
+-Dverbose=n
+-Dmailhost=...    # server which will send mail on behalf of the submit server
+-Ddatabase=...    # directory for the internal database of registrations
+-Droot=...        # directory in which the submissions are storee
+-Dreport.DIR=...  # directory in which acknowledgement reports are written
+-Dreport.URL=...  # URL at which the reports can be viewed on the WWW
+
+
+The student registers once with the submit server declaring their name
+and giving an e-mail address.  The student receives a control code
+which is valid until revoked by the server administer.  (We usually
+start anew every year; not every semester.)  A student can submit to
+any available assignment for any established course.  Any type and any
+number of files can be submited.  Mutliple submissions are possible.
+
+An administertor can create a course by creating a directory with a
+password file in it.  And intstructor can create an assignment for the
+course, allow submissions, and turn off submisssions with the
+password.  The lateest submission for each student can be downloaded
+as a single Java JAR file.
