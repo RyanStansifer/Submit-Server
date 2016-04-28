@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 public final class SubmitServer  {
 
-   private static final String VERSION = "Submit server 7.0 -- 3 March 2015";
    private static final int    DEFAULT_PORT = 13263;
 
    /*
@@ -57,7 +56,7 @@ public final class SubmitServer  {
    static {
       if (VERBOSE>1) {
 	 printStars();
-	 System.out.println ("Module to implement the submit server (version "+VERSION+", verbosity "+VERBOSE+")");
+	 System.out.printf  ("Module to implement the submit server (verbosity %d)", VERBOSE);
 	 System.out.println ("Date and time:  "+ new java.util.Date());
 	 System.out.println ("Java version: " + System.getProperty ("java.version") +
 	   " from " + System.getProperty ("java.vendor") + "  API version: " +
