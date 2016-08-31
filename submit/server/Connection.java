@@ -217,7 +217,7 @@ public class Connection implements Runnable {
                      resp.success = true;
                      resp.add_line ("The control code for "+ r.fullName() +" has been sent to the previously registered e-mail address.");
                      if (SubmitServer.VERBOSE>1) {
-                        System.out.println ("Help sent to:  " + r);
+                        System.out.printf ("Help sent to:  %s%n", r);
                      }
 
                   } catch (IOException ex) {
