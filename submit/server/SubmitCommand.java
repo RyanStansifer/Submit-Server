@@ -147,10 +147,11 @@ class SubmitCommand {
 
             /* Has name been sent twice? */
             if (man.contains (fi)) {
+               final String message = String.format ("Filename '%s' appears twice in manifest!", fi.name);
                if (SubmitServer.VERBOSE >= 0 ) {
-                  System.out.printf ("Filename '%s' appears twice in manifest!", fi.name);
+                  System.out.printf (message);
                }
-               resp.add_line (String.format ("Filename '%s' appears twice in manifest!", fi.name));
+               resp.add_line (message);
                write=false;  // Do not write this file into the jar file
             }
 
@@ -226,7 +227,7 @@ class SubmitCommand {
          resp.add_line ("All previous submissions (if any) for project '"+project_name+"' will be ignored.");
          resp.add_line ("If not all files were submitted, then submit again with all the files.");
          if (zeros>0) {
-            resp.add_line ("WARNING:  Did you mean to submit files of size zero?");            
+            resp.add_line ("WARNING:  Did you mean to submit files of size zero?");
          }
          resp.success = true;
          delete = false;
