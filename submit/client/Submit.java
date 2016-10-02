@@ -39,20 +39,30 @@ final public class Submit {
       }
       
       final Parameters p = Parameters.currentParameters();
-
-      final Set<FileInfo> hs = new HashSet<FileInfo> ();
-      if (p.fileOnly()) {
-         // just the file is sent and the parent director information is lost
-         for (int i=0; i<args.length; i++) hs.add (new FileInfo (args[i]));
-      } else {
-         // the file plus the parent directory information is sent
-         for (int i=0; i<args.length; i++) hs.add (new FileInfo (new File(args[i]), true));
-      }
-
       if (p.getCourse()==null || p.getProject()==null) {
-	 System.err.println ("Both 'course' and 'project' information required.");
+	 System.err.println ("ERROR: no attempt was made to submit any files.");
+	 System.err.println ("Both 'course' and 'project' information required to submit.");
          return;
       }
+
+      final Set<FileInfo> hs = new HashSet<FileInfo> ();
+
+      try {
+         if (p.fileOnly()) {
+            // just the file is sent and the parent director information is lost
+            for (int i=0; i<args.length; i++) hs.add (new FileInfo (args[i]));
+         } else {
+            // the file plus the parent directory information is sent
+            for (int i=0; i<args.length; i++) hs.add (new FileInfo (new File(args[i]), true));
+         }
+      } catch (final IllegalArgumentException ex) {
+	 System.err.println ("ERROR: no attempt was made to submit any files.");
+         System.err.println ("It is not allowed with submit files with certain characters in the file name.");
+         System.err.println ("Nor is not allowed with submit files above a certain size.");
+	 System.err.println (ex.getMessage());
+         return;
+      }
+
       System.out.print (analyzedSubmit(hs,p));
    }
 
