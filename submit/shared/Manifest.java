@@ -35,6 +35,7 @@ public class Manifest extends HashSet <FileInfo> implements Comparable <Manifest
       return registration.compareTo (m.registration);
    }
 
+   public Registration getRegistration ()   { return registration; }   // New method; breaks serialVersionUID!!
    public String getNameAsDirectory () { return registration.getNameAsDirectory(); }
    public Date   getTimeStamp ()      { return new Date(time_stamp); }
    public String getSubmittersName () { return registration.toString (false); }

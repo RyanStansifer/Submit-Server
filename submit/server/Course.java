@@ -145,4 +145,12 @@ final public class Course extends Context {
       return String.format ("course=%s, project=%s, control=%s, time=%s, dir=%s, time stamp=%s",
          course_name, project_name, control, Parameters.format(time_stamp), identity_directory, Context.formatUTC(time_stamp));
    }
+
+   public String toJSONString () {
+      final String course_name = course_directory.getName();
+      final String project_name = project_directory.getName();
+      return String.format ("{%n'course'='%s', 'project'='%s', 'control'='%s', 'time=%s', 'dir=%s', 'time stamp'='%s'%n}%n",
+         course_name, project_name, control, Parameters.format(time_stamp), identity_directory, Context.formatUTC(time_stamp));
+   }
+
 }

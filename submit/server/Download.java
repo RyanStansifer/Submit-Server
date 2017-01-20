@@ -1,6 +1,7 @@
 package submit.server;
 
 import submit.shared.Manifest;
+import submit.shared.Registration;
 import submit.shared.Encryption;
 import submit.shared.Response;
 
@@ -75,26 +76,36 @@ class Download {
       }
    }
 
-   private static void copyStream (byte[] a, OutputStream out) throws IOException {
+   private static void copyStream (final byte[] a, OutputStream out) throws IOException {
       copyStream (new ByteArrayInputStream (a), out);
    }
 
-   private static void copyStream (String x, OutputStream out) throws IOException {
+   private static void copyStream (final String x, OutputStream out) throws IOException {
       copyStream (x.getBytes(), out);
    }
 
 
-   public static void jar2jar (File dir, OutputStream out) throws ClassNotFoundException, IOException {
+   public static void jar2jar (final File dir, OutputStream out) throws ClassNotFoundException, IOException {
       final String top = String.format ("%s_%s_%s", semesterx, coursex, projectx);
       if (SubmitServer.VERBOSE>4) System.out.format ("jar2jar: dir=%s; top=%s%n", dir, top);
 
       final JarOutputStream jos = new JarOutputStream (out);
       jos.setMethod (JarEntry.DEFLATED);
 
+      /*
+        Include in the jar from some general meta information about the download.
+      */
+
       final JarEntry ije =new JarEntry(makePathNetwork (top,"INFO"));
       jos.putNextEntry (ije);
       final String info = String.format ("copied=%s, semester=%s, course=%s, project=%s%n", format.format(new Date()), semesterx, coursex, projectx);
       copyStream (info, jos);
+      jos.closeEntry();
+
+      final JarEntry ijej =new JarEntry(makePathNetwork (top,"info.json"));
+      jos.putNextEntry (ijej);
+      final String infoj = String.format ("{%n'copied'='%s', 'semester'='%s', 'course'='%s', 'project'='%s'%n}%n", format.format(new Date()), semesterx, coursex, projectx);
+      copyStream (infoj, jos);
       jos.closeEntry();
 
       final Set<File> students = Latest.lsd (dir);
@@ -105,7 +116,8 @@ class Download {
          // In the rare event student directory exists, but no submission
          if (jar==null) continue;
 
-         final Manifest man = Manifest.loadFromJar (jar);
+         final Manifest man = Manifest.loadFromJar (jar);  // The submission manifest (not the Jar manifest)
+
          final String submitter_directory;
          if (man==null) {
             // This is not good.
@@ -122,6 +134,17 @@ class Download {
             man.print (new PrintStream (x));
             x.close();
             copyStream (new ByteArrayInputStream (x.toByteArray()), jos);
+            jos.closeEntry();
+
+            final JarEntry xjej =new JarEntry(makePathNetwork (submitter_directory, "info.json"));
+            jos.putNextEntry (xjej);
+
+            final String name    = man.getRegistration().fullName();
+            final String control = man.getRegistration().getControl();
+            final String email   = man.getRegistration().getEMail();
+            final String time    = man.formatLocalTimeStamp();  // time of submission
+            final String xinfoj   = String.format ("{%n'name'='%s', 'control'='%s', 'email'='%s', 'time'='%s'%n}%n", name, control, email, time);
+            copyStream (xinfoj, jos);
             jos.closeEntry();
          }
 
