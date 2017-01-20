@@ -104,7 +104,8 @@ class Download {
 
       final JarEntry ijej =new JarEntry(makePathNetwork (top,"info.json"));
       jos.putNextEntry (ijej);
-      final String infoj = String.format ("{%n'copied'='%s', 'semester'='%s', 'course'='%s', 'project'='%s'%n}%n", format.format(new Date()), semesterx, coursex, projectx);
+      final String iformat = "{%n\"copied\":\"%s\", \"semester\":\"%s\", \"course\":\"%s\", \"project\":\"%s\"%n}%n";
+      final String infoj = String.format (iformat, format.format(new Date()), semesterx, coursex, projectx);
       copyStream (infoj, jos);
       jos.closeEntry();
 
@@ -143,7 +144,8 @@ class Download {
             final String control = man.getRegistration().getControl();
             final String email   = man.getRegistration().getEMail();
             final String time    = man.formatLocalTimeStamp();  // time of submission
-            final String xinfoj   = String.format ("{%n'name'='%s', 'control'='%s', 'email'='%s', 'time'='%s'%n}%n", name, control, email, time);
+            final String xformat = "{%n\"name\":\"%s\", \"control\":\"%s\", \"email\":\"%s\", \"time\":\"%s\"%n}%n";
+            final String xinfoj   = String.format (xformat, name, control, email, time);
             copyStream (xinfoj, jos);
             jos.closeEntry();
          }
