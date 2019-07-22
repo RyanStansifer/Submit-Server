@@ -36,12 +36,9 @@ public class Database {
    public    Date    date;  //  Used as an application-level version number
    private   HashMap<String,Registration> registered;
    
-   //   private transient String name = null;
-
-   public  Database () { this(new Date()); }
+   private Database () { this(new Date()); }
    private Database (final Date d) { date=d; }
    private Database (final Date d, final HashMap<String,Registration> data) { date=d; registered=data; }
-
 
    public static Database init () throws IOException {
 
@@ -66,6 +63,7 @@ public class Database {
 	 db.registered = Registration.create (r);
 
       } else {
+         // Either the "info.tsp" or the "info.reg" file does not exist.
 	 db.date = new Date ();           // Now
 	 db.registered = new HashMap<String,Registration> ();
       }
@@ -285,11 +283,6 @@ public class Database {
       for (Registration r: registered.values()) {
          out.println (r);
       }
-      /*
-      for (Iterator i = registered.values().iterator(); i.hasNext(); ) {
-	 out.println (i.next());
-      }
-      */
    }
 
    public static void main (String[] args) throws Exception {
