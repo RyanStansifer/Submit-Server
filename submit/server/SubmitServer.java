@@ -54,14 +54,14 @@ public final class SubmitServer  {
 
    // Informational Banner
    static {
-      if (VERBOSE>1) {
+      if (VERBOSE>=1) {
 	 printStars();
-	 System.out.printf  ("Module to implement the submit server (verbosity %d)", VERBOSE);
-	 System.out.println ("Date and time:  "+ new java.util.Date());
+	 System.out.printf  ("Module to implement the submit server (verbosity %d)%n", VERBOSE);
+	 System.out.printf  ("Date and time:  %s%n", new java.util.Date());
 	 System.out.println ("Java version: " + System.getProperty ("java.version") +
 	   " from " + System.getProperty ("java.vendor") + "  API version: " +
 	   System.getProperty ("java.class.version"));
-	 System.out.println ("Running on host " + HOST +" by " + System.getProperty ("user.name"));
+	 System.out.printf ("Running on host %s by %s%n", HOST, System.getProperty ("user.name"));
 	 System.out.println ("Operating system: " + System.getProperty ("os.name") +
            " " + System.getProperty ("os.version") +
            " on " + System.getProperty ("os.arch"));

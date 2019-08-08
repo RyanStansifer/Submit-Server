@@ -163,23 +163,23 @@ public final class Registration implements Comparable <Registration>, Serializab
    /* Set the Most Significant Bit; a new series of control codes can be created
       by increasing the length by 1. */
 
-   private static final int MSB = 45; // Changed 2 July 2012
+   private static final int MSB = 41; // Changed 8 Aug 2019
 
    private static BigInteger createControl () {
       return new BigInteger (MSB, new Random ()).setBit(MSB);
    }
 
-   private static boolean ambiguous (String x) {
+   private static boolean ambiguous (final String x) {
       // exclude 'O' (the letter O)
       return x.indexOf('O')!=-1 || x.indexOf('L')!=-1;
    }
-   private static boolean ambiguous (BigInteger b) {
+   private static boolean ambiguous (final BigInteger b) {
       return ambiguous (b.toString(36).toUpperCase());
    }
 
    private static BigInteger createReadableControl () {
       for (;;) {
-         BigInteger b = createControl();
+         final BigInteger b = createControl();
          // How do we know we didn't randomly create a control code already in use?
          if (!ambiguous (b)) return b;
       }
@@ -299,7 +299,6 @@ public final class Registration implements Comparable <Registration>, Serializab
       }
    }
 
-
    public String toString (int i) {
       if (i==0) {
          return (last_name+", "+first_name+" ("+control+"), email="+email);
@@ -308,8 +307,7 @@ public final class Registration implements Comparable <Registration>, Serializab
       }
    }
 
-
-   public static void main (String [] args) throws IOException, ParseException {
+   public static void main (final String [] args) throws IOException, ParseException {
       final BufferedReader br = new BufferedReader (new InputStreamReader (System.in));
       for (;;) {
 	 final String line = br.readLine();
