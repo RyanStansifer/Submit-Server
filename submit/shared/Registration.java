@@ -189,7 +189,6 @@ public final class Registration implements Comparable <Registration>, Serializab
 
    public String getKey ()      { return control; }
    public String getControl ()  { return control; }
-   //private String getDirectoryName () { return control; }
    public String getEMail () { return email; }
    public String getHelpMessage () {
       return
@@ -198,18 +197,18 @@ public final class Registration implements Comparable <Registration>, Serializab
 	 "\nlast_name="+last_name+
 	 "\ncontrol="+getControl()+"\n"+
          "\nPlease observe the difference between the letter 'l' and the digit '1'."+
-         "\nThe date and time of registration is "+dt.format (timestamp)+"\n";
+         "\nThe date and time of this registration is "+dt.format (timestamp)+"\n";
    }
 
    public String getReregisterMessage () {
       return
-         "Please keep this message, it contains your control code.\n"+
-         "Ingnore any previous control codes. (Note that e-mail is not always delivered in the order in which it was sent.)"+
+         "Please keep this message, it contains your control code."+
+         "\nIgnore any previous control codes."+
 	 "\nfirst_name="+first_name+
 	 "\nlast_name="+last_name+
 	 "\ncontrol="+getControl()+"\n"+
-         "\nPlease observe the difference between the letter 'l' and the digit '1'.\n"+
-         "\nThe date and time of registration is "+dt.format (timestamp)+"\n";
+         "\nPlease observe the difference between the letter 'l' and the digit '1'."+
+         "\nThe date and time of this registration is "+dt.format (timestamp)+"\n";
    }
 
    // The characters " ", ".", "-", "'" might legitimately appear in names, but we may not
