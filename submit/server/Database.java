@@ -35,6 +35,10 @@ public class Database {
 
    public    Date    date;  //  Used as an application-level version number
    private   HashMap<String,Registration> registered;
+   public int size() {
+      if (registered==null) return -1;
+      else return this.registered.size();
+   }
    
    private Database () { this(new Date()); }
    private Database (final Date d) { date=d; }
@@ -80,6 +84,7 @@ public class Database {
 	 System.out.println ("  DB is dir?    " + db.directory.isDirectory());
 	 System.out.println ("  DB writable?  " + db.directory.canWrite());
 	 System.out.println ("Database version as of "+db.date);
+	 System.out.printf  ("Current number of registrations in the database is %d%n", db.registered.size());
 	 System.out.println ("Root of submission tree (-Droot="+DEFAULT_ROOT+"):");
 	 System.out.println (db.root.getCanonicalPath());
 	 System.out.println ("  Root exists?    " + db.root.exists());
@@ -212,7 +217,7 @@ public class Database {
       return (o.getControl());
    }
 
-   public Registration isRegistered (String first_name, String last_name) {
+   public Registration isRegistered (final String first_name, final String last_name) {
       return Registration.isRegistered (registered, first_name, last_name);
    }
 

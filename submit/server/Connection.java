@@ -95,10 +95,10 @@ public class Connection implements Runnable {
                CreateProject.turnon (args, resp);
             } else if (cmd.equals ("turnoff")) {
                CreateProject.turnoff (args, resp);
-            } else if (cmd.equals ("report")) {
+            } else if (cmd.equals ("report")) {   // report for project of course
                CreateProject.report (args, resp);
             } else if (cmd.equals ("status")) {
-               CreateProject.status (args, resp);
+               CreateProject.status (args, resp);  // status of course
             } else if (cmd.equals ("download")) {
                Download.download (args, resp, ois, oos);
                if (resp.success) resp=null;  // signal end of protocol

@@ -75,9 +75,11 @@ public final class Registration implements Comparable <Registration>, Serializab
       this (control, last_name, first_name, email, dt.parse (date), Boolean.valueOf (activated));
    }
 
+   private final static int BASE = 35;  // upto to 36 soemwaht arbitary to get letters and digits
+
    // Database.java creates new Registration
    public Registration (String last_name, String first_name, final String email) {
-      this (createReadableControl().toString(36), last_name, first_name, email, new Date(), false);
+      this (createReadableControl().toString(BASE), last_name, first_name, email, new Date(), false);
    }
 
    /*
@@ -159,7 +161,6 @@ public final class Registration implements Comparable <Registration>, Serializab
    @Override
    public int hashCode () { return control.hashCode(); }
    
-
    /* Set the Most Significant Bit; a new series of control codes can be created
       by increasing the length by 1. */
 
@@ -174,13 +175,14 @@ public final class Registration implements Comparable <Registration>, Serializab
       return x.indexOf('O')!=-1 || x.indexOf('L')!=-1;
    }
    private static boolean ambiguous (final BigInteger b) {
-      return ambiguous (b.toString(36).toUpperCase());
+      return ambiguous (b.toString(BASE).toUpperCase());
    }
 
    private static BigInteger createReadableControl () {
       for (;;) {
          final BigInteger b = createControl();
          // How do we know we didn't randomly create a control code already in use?
+         // ambiguous() does not check; left to DataBase.register() to deal with
          if (!ambiguous (b)) return b;
       }
    }
@@ -241,7 +243,7 @@ public final class Registration implements Comparable <Registration>, Serializab
    }
 
    private boolean close (final Registration r) {
-      if (control.equals (r.control)) return true;
+      if (control.equals (r.control)) return true;  // prevents randomly creating same key
       if (getSquashedName().equals (r.getSquashedName())) return true;
       if (getEMail().toLowerCase().equals (r.getEMail().toLowerCase())) return true;
       return false;
