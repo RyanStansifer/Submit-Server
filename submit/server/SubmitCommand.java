@@ -34,7 +34,7 @@ class SubmitCommand {
             System.out.format ("No registration for control code '%s'%n", args.getControl());
          }
          resp.add_line ("Error:  control code not registered with the submit server; check for typos.");
-         resp.add_line (String.format ("Also, all registrations before %s have been deleted; registration again may be required.", SubmitServer.db.date));
+         resp.add_line (String.format ("Also, you may need to register again, if you last registered before %s.", SubmitServer.db.date));
          return;
       }
       if (SubmitServer.VERBOSE>2) {
