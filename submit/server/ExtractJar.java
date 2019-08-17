@@ -28,7 +28,7 @@ class ExtractJar {
 
       if (course==null || project==null) return;
 
-      final File course_directory = CreateProject.getCourseDirectory (course);
+      final File course_directory = SubmitServer.getCourseDirectory (course);
       if (!course_directory.isDirectory()) {
          resp.failBecause (String.format ("Course %s not found.", CreateProject.infoCourse (course, args)));
          return;
@@ -40,7 +40,7 @@ class ExtractJar {
          return;
       }
 
-      final File project_directory = CreateProject.getProjectDirectory (course_directory, project);
+      final File project_directory = SubmitServer.getProjectDirectory (course_directory, project);
       final String pp = "Pass Phrase";
       final String filename = "XXX.jar.crypt";
       final Encryption e = new Encryption (pp);

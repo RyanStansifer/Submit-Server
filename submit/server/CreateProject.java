@@ -14,13 +14,10 @@ import java.io.IOException;
 
 class CreateProject {
 
-   private final static File COURSE_CONTEXT_ROOT = SubmitServer.db.root;
+   // private final static File COURSE_CONTEXT_ROOT = if SubmitServer.db==null ? null :  SubmitServer.db.root;
    private final static String PASSWORD_FILENAME = "PASSWORD";
 
-   public static File getCourseDirectory (String course) {
-      return new File (COURSE_CONTEXT_ROOT, course);
-   }
-
+   /*
    public static File getRealCourseDirectory (String course) {
       try {
          return new File (COURSE_CONTEXT_ROOT, course).getCanonicalFile();
@@ -28,17 +25,10 @@ class CreateProject {
          return null;
       }
    }
+   */
 
    public static String getSemester (final File real_course_directory) {
       return real_course_directory.getParentFile().getName();
-   }
-
-   public static File getProjectDirectory (File course, String project) {
-      return new File (course, project);
-   }
-      
-   public static File getProjectDirectory (String c, String proj) {
-      return new File (new File (COURSE_CONTEXT_ROOT, c), proj);
    }
 
    private static synchronized boolean turnSubmissionsOn (final File project_directory) {
@@ -127,9 +117,9 @@ class CreateProject {
       final String i = infoCourse (course, args);
       String p = args.getProperty("project");
       try {
-         p = CreateProject.getProjectDirectory (course, project).getCanonicalFile().getName();
+         p = SubmitServer.getProjectDirectory (course, project).getCanonicalFile().getName();
       } catch (IOException ex) {
-         // No likely, or important
+         // Not likely, or important
       }
       if (p.equals (project)) {
          return String.format ("project '%s' for course %s", p, i);
@@ -148,7 +138,7 @@ class CreateProject {
 
       if (course==null || project==null) return;
 
-      final File course_directory = getCourseDirectory (course);
+      final File course_directory = SubmitServer.getCourseDirectory (course);
       if (!course_directory.isDirectory()) {
          if (SubmitServer.VERBOSE>4) {
             System.out.format ("File not found or not directory: '%s'%n", course_directory);
@@ -164,7 +154,7 @@ class CreateProject {
          return;
       }
 
-      final File project_directory = getProjectDirectory (course_directory, project);
+      final File project_directory = SubmitServer.getProjectDirectory (course_directory, project);
       if (project_directory.isDirectory()) {
          resp.success = false;
          resp.add_line (String.format ("Won't create a new project; a directory for project '%s' already exists.", project));
@@ -197,7 +187,7 @@ class CreateProject {
 
       if (course==null || project==null) return;
 
-      final File course_directory = getCourseDirectory (course);
+      final File course_directory = SubmitServer.getCourseDirectory (course);
       if (!course_directory.isDirectory()) {
          resp.failBecause (String.format ("Course %s not found.", infoCourse (course, args)));
          return;
@@ -209,7 +199,7 @@ class CreateProject {
          return;
       }
 
-      final File project_directory = getProjectDirectory (course_directory, project);
+      final File project_directory = SubmitServer.getProjectDirectory (course_directory, project);
       if (!project_directory.isDirectory()) {
          resp.failBecause (String.format ("The %s not found.", infoCourseProject (course, project, args)));
          return;
@@ -239,7 +229,7 @@ class CreateProject {
 
       if (course==null || project==null) return;
 
-      final File course_directory = getCourseDirectory (course);
+      final File course_directory = SubmitServer.getCourseDirectory (course);
       if (!course_directory.isDirectory()) {
          resp.failBecause (String.format ("Course %s not found.", infoCourse (course, args)));
          return;
@@ -251,7 +241,7 @@ class CreateProject {
          return;
       }
 
-      final File project_directory = getProjectDirectory (course_directory, project);
+      final File project_directory = SubmitServer.getProjectDirectory (course_directory, project);
       if (!project_directory.isDirectory()) {
          resp.failBecause (String.format ("The %s not found.", infoCourseProject (course, project, args)));
          return;
@@ -278,7 +268,7 @@ class CreateProject {
          return;
       }
 
-      final File course_directory = getCourseDirectory (course);
+      final File course_directory = SubmitServer.getCourseDirectory (course);
       if (!course_directory.isDirectory()) {
          resp.failBecause (String.format ("Course %s not found.", infoCourse (course, args)));
          return;
@@ -308,7 +298,7 @@ class CreateProject {
 
       if (course==null || project==null) return;
 
-      final File course_directory = getCourseDirectory (course);
+      final File course_directory = SubmitServer.getCourseDirectory (course);
       if (!course_directory.isDirectory()) {
          resp.failBecause (String.format ("Course %s not found.", infoCourse (course, args)));
          return;
@@ -320,7 +310,7 @@ class CreateProject {
          return;
       }
 
-      final File project_directory = getProjectDirectory (course_directory, project);
+      final File project_directory = SubmitServer.getProjectDirectory (course_directory, project);
       if (!project_directory.isDirectory()) {
          resp.failBecause (String.format ("The %s not found.", infoCourseProject (course, project, args)));
          return;

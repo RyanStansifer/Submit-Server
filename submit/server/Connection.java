@@ -53,7 +53,7 @@ public class Connection implements Runnable {
       } else {
          if (SubmitServer.VERBOSE>0) System.out.println ("The client sent an object of an unexpected type.");
          return null;
-      }
+}
    }
 
    private Parameters args;  // non-local input to the commands
@@ -87,18 +87,16 @@ public class Connection implements Runnable {
                register ();
             } else if (cmd.equals ("mail")) {
                mail ();
-            } else if (cmd.equals ("stop")) {
-               // No graceful way to stop
             } else if (cmd.equals ("create")) {
                CreateProject.create (args, resp);
             } else if (cmd.equals ("turnon")) {
                CreateProject.turnon (args, resp);
             } else if (cmd.equals ("turnoff")) {
                CreateProject.turnoff (args, resp);
-            } else if (cmd.equals ("report")) {   // report for project of course
+            } else if (cmd.equals ("report")) {   // report for project of a course
                CreateProject.report (args, resp);
             } else if (cmd.equals ("status")) {
-               CreateProject.status (args, resp);  // status of course
+               CreateProject.status (args, resp);  // status of a course
             } else if (cmd.equals ("download")) {
                Download.download (args, resp, ois, oos);
                if (resp.success) resp=null;  // signal end of protocol
@@ -136,6 +134,7 @@ public class Connection implements Runnable {
       } catch (Exception ex) {
          reportException (ex);
       }
+      /* Can't catch NoClassDefFoundError: a possible class initilization error */
       /* Let the submit server close the socket.  */
    }
 

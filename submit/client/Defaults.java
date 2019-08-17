@@ -2,7 +2,6 @@ package submit.client;
 
 import java.io.*;
 
-
 import java.util.Date;
 import java.util.Properties;
 import java.util.ResourceBundle;
@@ -30,14 +29,11 @@ public  static       String current     //  -Dcurrent    current          x o
                                         //  -Dcode       code             x x
                                         //  -Dclass      class            x x
                                         //  -Dproject    project          ? x
-
 */
 
 
 public final class Defaults {
 
-   /*
-    */
    private static final ResourceBundle bundle;
    
    static {
@@ -82,8 +78,7 @@ public final class Defaults {
    /*
      Client Version
    */
-   public static final String VERSION = "Submit client 8.1 -- 6 Oct 2012";
-
+   public static final String VERSION = "Submit client -- 17 Aug 2019";
 
    /*
      Parameter "VERBOSE" for controlling messages
@@ -375,11 +370,11 @@ public final class Defaults {
    public static final Boolean NOFILES = Boolean.getBoolean ("nofiles");
 
    // Read parameter "project" (especially from command line); but don't write it
-   static String [] props = {
+   private static String [] props = {
       "server","port","last_name","first_name","email","control","course","current","project","problem","archive","password","nopeek","nofiles","relative"
    };
 
-   private static Properties overrideProperties (Properties def) {
+   private static Properties overrideProperties (final Properties def) {
       final Properties final_props = new Properties ();
       for (int i=0; i<props.length; i++) {
 	 final String value = System.getProperty(props[i],def.getProperty(props[i]));
@@ -389,7 +384,7 @@ public final class Defaults {
       return final_props;
    }
 
-   static Properties makeProperties (File file)  {
+   static Properties makeProperties (final File file)  {
       final Properties final_props  = overrideProperties (fileProperties (file));
       return final_props;
    }

@@ -44,7 +44,7 @@ public class Database {
    private Database (final Date d) { date=d; }
    private Database (final Date d, final HashMap<String,Registration> data) { date=d; registered=data; }
 
-   public static Database init () throws IOException {
+   public static Database init () throws IOException, RuntimeException {
 
       final Database db = new Database ();
 

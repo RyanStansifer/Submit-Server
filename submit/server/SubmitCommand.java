@@ -234,7 +234,7 @@ class SubmitCommand {
          delete = false;
 
          // Find out where the report is going.
-         final File real = CreateProject.getProjectDirectory (course_name, project_name).getCanonicalFile();
+         final File real = SubmitServer.getProjectDirectory (course_name, project_name).getCanonicalFile();
          final String url = Report.reportURL (real);
          try {
             Report.main (real);   // real class name??

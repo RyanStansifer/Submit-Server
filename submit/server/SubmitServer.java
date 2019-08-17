@@ -90,10 +90,30 @@ public final class SubmitServer  {
       }
    }
 
+   public static File getCourseDirectory (String course) throws NullPointerException {
+      return new File (db.root, course);
+   }
+
+   public static File getRealCourseDirectory (String course) {
+      try {
+         return new File (db.root, course).getCanonicalFile();
+      } catch (IOException ex) {
+         return null;
+      }
+   }
+
+   public static File getProjectDirectory (File course, String project) {
+      return new File (course, project);
+   }
+      
+   public static File getProjectDirectory (String c, String proj) {
+      return new File (SubmitServer.getCourseDirectory (c), proj);
+   }
+
+
 
    private static boolean cont = true;
    public static void haltServer () { cont=false; }
-
 
    public static void main (String args[]) throws IOException {
       int port = DEFAULT_PORT;

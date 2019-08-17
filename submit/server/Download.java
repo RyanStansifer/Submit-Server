@@ -34,7 +34,7 @@ class Download {
 
       if (course==null || project==null) return;
 
-      final File course_directory = CreateProject.getRealCourseDirectory (course);
+      final File course_directory = SubmitServer.getRealCourseDirectory (course);
       if (!course_directory.isDirectory()) {
          resp.failBecause (String.format ("Course %s not found.", CreateProject.infoCourse (course, args)));
          return;
@@ -50,7 +50,7 @@ class Download {
          return;
       }
 
-      final File project_directory = CreateProject.getProjectDirectory (course_directory, project);
+      final File project_directory = SubmitServer.getProjectDirectory (course_directory, project);
 
       resp.success = true;
       resp.add_line ("Internal protocol message: ready to send jar");
