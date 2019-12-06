@@ -102,6 +102,7 @@ class Download {
       copyStream (info, jos);
       jos.closeEntry();
 
+      // JSON info about the projects (JSON info about the submission comes later)
       final JarEntry ijej =new JarEntry(makePathNetwork (top,"info.json"));
       jos.putNextEntry (ijej);
       final String iformat = "{%n\"copied\":\"%s\", \"semester\":\"%s\", \"course\":\"%s\", \"project\":\"%s\"%n}%n";
@@ -141,11 +142,13 @@ class Download {
             jos.putNextEntry (xjej);
 
             final String name    = man.getRegistration().fullName();
+            final String first   = man.getRegistration().firstName();
+            final String last    = man.getRegistration().lastName();
             final String control = man.getRegistration().getControl();
             final String email   = man.getRegistration().getEMail();
             final String time    = man.formatLocalTimeStamp();  // time of submission
-            final String xformat = "{%n\"name\":\"%s\", \"control\":\"%s\", \"email\":\"%s\", \"time\":\"%s\"%n}%n";
-            final String xinfoj   = String.format (xformat, name, control, email, time);
+            final String xformat = "{%n\"name\":\"%s\", \"control\":\"%s\", \"email\":\"%s\", \"time\":\"%s\", \"project\":\"%s\"%n}%n";
+            final String xinfoj   = String.format (xformat, name, last, first, control, email, time, projectx);
             copyStream (xinfoj, jos);
             jos.closeEntry();
          }

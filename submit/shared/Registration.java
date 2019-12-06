@@ -275,6 +275,8 @@ public final class Registration implements Comparable <Registration>, Serializab
       return null;
    }
 
+   public String lastName () { return last_name; }
+   public String firstName () { return first_name; }
    public String fullName () {
       return (first_name+" "+last_name);
    }
