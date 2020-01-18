@@ -147,13 +147,12 @@ class Download {
             final String control = man.getRegistration().getControl();
             final String email   = man.getRegistration().getEMail();
             final String time    = man.formatLocalTimeStamp();  // time of submission
-            final String xformat = "{%n\"name\":\"%s\", \"control\":\"%s\", \"email\":\"%s\", \"time\":\"%s\", \"project\":\"%s\"%n}%n";
+            final String xformat = "{%n\"name\":\"%s\", \"last\":\"%s\", \"first\":\"%s\", \"control\":\"%s\", \"email\":\"%s\", \"time\":\"%s\", \"project\":\"%s\"%n}%n";
             final String xinfoj   = String.format (xformat, name, last, first, control, email, time, projectx);
             copyStream (xinfoj, jos);
             jos.closeEntry();
          }
 
-         //final JarInputStream jis = new JarInputStream (new FileInputStream(jar));
          final String submissions_directory = makePathNetwork (submitter_directory, "submission");
 
          try (
@@ -171,7 +170,6 @@ class Download {
                   jos.closeEntry();
                }
          }
-         //jis.close();
       }
       jos.close();
    }
