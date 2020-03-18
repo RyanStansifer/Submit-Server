@@ -27,7 +27,7 @@ public class ResponseObject {
       }
    }
 
-   private ResponseObject (Response r, Exception ex, String a) {
+   private ResponseObject (final Response r, final Exception ex, final String a) {
       this.r = r;
       this.ex = ex;
       if (a==null) {
@@ -119,7 +119,7 @@ public class ResponseObject {
          final int port = p.getPort();
 	 String message = "Unable to make a connection to the submit server.\n";
 	 message += "   " + ex.toString() + "\n";
-	 message += "Perhaps the Internet is inaccessible at this moment, or the server is not running.\n";
+	 message += "Perhaps the Internet is inaccessible at this moment, the host is down, or the server is not running.\n";
          message += "Or maybe the hostname ("+host+") or port ("+port+") is wrong.\n";
          if (!p.isDefaultServer()) {
 	    message += "By the way, this is not the default host.  The default host is " + Defaults.DEFAULT_SERVER + "\n";
