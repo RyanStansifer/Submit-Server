@@ -1,5 +1,5 @@
 JAVAC := javac
-JOPT  := -Xlint:-serial -encoding latin1
+JOPT  := -Xlint:-serial -encoding us-ascii
 DIR   := submit
 
 %.class :       %.java
