@@ -1,7 +1,6 @@
 package submit.server;
 
 import submit.shared.Manifest;
-import submit.shared.Encryption;
 import submit.shared.Registration;
 import submit.shared.Response;
 import submit.shared.FileInfo;

@@ -44,10 +44,10 @@ import java.io.Serializable;
 public final class Registration implements Comparable <Registration>, Serializable {
 
    /*
-      On 29 Jan 2013:
-      > serialver submit.shared.Registration
+        Going to manually update veresions from now on.
+        [Why update at all?]
    */
-   static final long serialVersionUID = -3237593357848649027L;
+   static final long serialVersionUID = 5L;
 
    private final String control, last_name, first_name, email;
    private final Date timestamp;  // Creation date
@@ -75,7 +75,7 @@ public final class Registration implements Comparable <Registration>, Serializab
       this (control, last_name, first_name, email, dt.parse (date), Boolean.valueOf (activated));
    }
 
-   private final static int BASE = 35;  // upto to 36 soemwaht arbitary to get letters and digits
+   private final static int BASE = 35;  // upto to 36 somewhat arbitary to get letters and digits
 
    // Database.java creates new Registration
    public Registration (String last_name, String first_name, final String email) {
@@ -164,7 +164,7 @@ public final class Registration implements Comparable <Registration>, Serializab
    /* Set the Most Significant Bit; a new series of control codes can be created
       by increasing the length by 1. */
 
-   private static final int MSB = 41; // Changed 8 Aug 2019
+   private static final int MSB = 42; // Changed 8 May 2021
 
    private static BigInteger createControl () {
       return new BigInteger (MSB, new Random ()).setBit(MSB);

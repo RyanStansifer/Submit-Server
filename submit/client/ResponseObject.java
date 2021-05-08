@@ -37,8 +37,8 @@ public class ResponseObject {
       }
    }
 
-   public ResponseObject (Response r)    { this (r, null, r.toString());   }
-   public ResponseObject (Exception ex)  { this (null, ex, makeAnalysis (ex));   }
+   public ResponseObject (final Response r)    { this (r, null, r.toString());   }
+   public ResponseObject (final Exception ex)  { this (null, ex, makeAnalysis (ex));   }
 
    // Dispatch explicitly based on type of exception
    // Does this work?  Yes, but it is dangerously close to a self-recursive loop
@@ -119,7 +119,8 @@ public class ResponseObject {
          final int port = p.getPort();
 	 String message = "Unable to make a connection to the submit server.\n";
 	 message += "   " + ex.toString() + "\n";
-	 message += "Perhaps the Internet is inaccessible at this moment, the host is down, or the server is not running.\n";
+	 message += "Perhaps the host is down, or the server is not running.\n";
+         /*
          message += "Or maybe the hostname ("+host+") or port ("+port+") is wrong.\n";
          if (!p.isDefaultServer()) {
 	    message += "By the way, this is not the default host.  The default host is " + Defaults.DEFAULT_SERVER + "\n";
@@ -128,6 +129,7 @@ public class ResponseObject {
 	    message += "By the way, the port number "+port+" is not the default port.\n";
             message += "The default port is " + Defaults.DEFAULT_PORT + "; try using it instead.\n";
 	 }
+         */
 	 return message;
    }
 

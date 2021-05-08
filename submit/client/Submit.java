@@ -66,11 +66,6 @@ final public class Submit {
       System.out.print (analyzedSubmit(hs,p));
    }
 
-   @Deprecated
-   private static Response submit (final Set<FileInfo> hs, final Parameters p) throws IOException, ClassNotFoundException {
-      return submit (hs, p, null);
-   }
-
    public static Response submit (final Set<FileInfo> hs, final Parameters p, final Map<String,String> m) throws IOException, ClassNotFoundException {
       final String server = p.getServer();
       final int port      = p.getPort();
@@ -144,11 +139,6 @@ final public class Submit {
       return analyzedSubmit (f, p, m);
    }
 
-   @Deprecated
-   private static ResponseObject analyzedSubmit (final Set<FileInfo> f, final Map<String,String> m) {
-      return analyzedSubmit (f, Parameters.currentParameters(), m);
-   }
-
    public static ResponseObject analyzedSubmit (final Set<FileInfo> f, final Parameters p, final Map<String,String> m) {
       try {
 	 return new ResponseObject (submit(f,p,m));
@@ -185,13 +175,6 @@ final public class Submit {
       fis.close();
       oos.writeObject (null);   // No more byte arrays for this file
       oos.flush();
-   }
-
-   @Deprecated
-   private static byte [] slice (byte [] a, int offset, int length) {
-      byte [] r = new byte [length];
-      System.arraycopy (a, offset, r, 0, length);
-      return r;
    }
 
    public static boolean missing (Parameters p, String name) {

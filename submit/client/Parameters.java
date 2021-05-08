@@ -259,37 +259,6 @@ public final class Parameters {
       oos.writeObject (o);
    }
 
-		       
-   public void write () { write (properties_file); }
-
-   public void write (File file) {
-      final String cmt = "Written by SubmitClient (version "+Defaults.VERSION+").  Do not remove!";
-      final Properties p = (Properties) properties.clone();
-      p.remove ("command");  // Should not be there
-      p.remove ("client");   // Should not be there
-      p.remove ("directory");// Useless
-      // p.remove ("file");     // Useless
-      p.remove ("project");  // Changes each time
-      p.remove ("user.home");
-      p.remove ("host");
-      try {
-	 p.store (new FileOutputStream (file), cmt);
-      } catch (IOException e) {
-	 e.printStackTrace (System.err);
-	 System.out.println ("Continuing ...");
-	 System.out.println ("Writing parameters file in current working directory");
-	 try {
-	    properties.store (new FileOutputStream (Defaults.file_name), cmt);
-	 } catch (IOException e2) {
-	    e2.printStackTrace (System.err);
-	    System.out.println ("Giving up writing parameters file!");
-	 }
-      } catch (NoSuchMethodError e) {
-	 e.printStackTrace (System.err);
-	 System.err.println ("Can't write file.  Are you using a version of Java before 1.2?");
-      }
-   }
-
    public static void main (String [] args) throws IOException {
       System.out.println ();
       Defaults.printStars();
