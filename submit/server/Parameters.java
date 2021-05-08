@@ -13,12 +13,12 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 /*
-  This class gets serialized a class Properties in submit.shared.Manfest
+  This class gets serialized in a class Properties in submit.shared.Manfest
 */
-class Parameters extends Properties implements Serializable {
+final class Parameters extends Properties implements Serializable {
 
-   // Shall we lie and use an old serialID??
-   static final long serialVersionUID = 5345151278882814896L;
+   // Use our new series of version id
+   static final long serialVersionUID = 5L;
 
    Parameters (final String n) {
       this (n, null);
@@ -37,7 +37,6 @@ class Parameters extends Properties implements Serializable {
    /*
      Override keys with values found in args.
    */
-
    void add (final Properties args) {
       for (Map.Entry<Object,Object> e: args.entrySet()) {
          if (e==null) continue;  // Huh?
@@ -100,11 +99,11 @@ class Parameters extends Properties implements Serializable {
 
    private final static Pattern INITIAL_PAT = Pattern.compile ("[a-z0-9_-]+");
 
-   public String clean (final String s) {
+   private final static String clean (final String s) {
       return s.replaceAll ("\\s", "").toLowerCase();
    }
 
-   public String veryClean (final String s) {
+   private final static String veryClean (final String s) {
       final Matcher init = INITIAL_PAT.matcher (clean(s));
       if (init.lookingAt()) {
          return init.group(0);
@@ -118,10 +117,6 @@ class Parameters extends Properties implements Serializable {
       final String value = getProperty (key);
       if (value==null) return null;
       return veryClean (value);
-   }
-
-   boolean authenticateAdministrator () {
-      return (false);
    }
 
    public String toString () {
