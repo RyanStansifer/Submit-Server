@@ -237,8 +237,8 @@ public class Connection implements Runnable {
       }
    }
 
-   private static final DateFormat format = new SimpleDateFormat ("EEE, dd MMM yyyy 'at' hh:mm a z");
-   static String date () { return format.format (new Date()); }
+   //private static final DateFormat format = new SimpleDateFormat ("EEE, dd MMM yyyy 'at' hh:mm a z");
+   static String date () { return Parameters.format.format (new Date()); }
 
    static void mail (final Registration r, final String subject, final String message) throws IOException {
       final String email = r.getEMail();

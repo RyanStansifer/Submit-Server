@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.Properties;
 
-public class Database {
+public final class Database {
 
    private final static String DEFAULT_ROOT   = "submissions";
    public final File root = new File (System.getProperty ("root", DEFAULT_ROOT));
@@ -34,6 +34,8 @@ public class Database {
    public final String mailhost = System.getProperty ("mailhost", DEFAULT_MAIL);
 
    public    Date    date;  //  Used as an application-level version number
+   public String date () { return Parameters.format.format (date); }
+
    private   HashMap<String,Registration> registered;
    public int size() {
       if (registered==null) return -1;

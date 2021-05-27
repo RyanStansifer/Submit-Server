@@ -3,7 +3,6 @@ package submit.server;
 import submit.shared.Registration;
 import submit.shared.Response;
 
-
 final class PingAction {
 
    static void ping (final Parameters args, final Response resp) {
@@ -33,7 +32,7 @@ final class PingAction {
       }
 
       resp.add_line (String.format ("The current date and time on the server is %s.", Connection.date()));
-      resp.add_line (String.format ("Registration began on %s, currently %d registrations.", SubmitServer.db.date, SubmitServer.db.size()));
+      resp.add_line (String.format ("Registration began on %s, currently %d registrations.", SubmitServer.db.date(), SubmitServer.db.size()));
       resp.success = true;
    }
 
