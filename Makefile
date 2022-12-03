@@ -1,4 +1,5 @@
 JAVAC := javac
+JAVAC := /usr/lib/jvm/java-8-oracle/bin/javac
 JOPT  := -Xlint:-serial -encoding us-ascii
 DIR   := submit
 
